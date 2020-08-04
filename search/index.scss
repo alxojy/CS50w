@@ -1,0 +1,60 @@
+nav .navbar-nav a {
+    font-size: x-small;
+    color: black !important;
+}
+.nav-item:hover {
+    text-decoration: underline;
+}
+
+.form-rounded {
+    border-radius: 50px;
+    width: 480px;
+}
+
+.form-control:focus {
+    border-color: #A4A4A4;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+.mt {
+    margin-top: 90px;
+}
+
+.mr-as {
+    margin-right: 605px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.btn-pri {
+    color: #616161;
+    border-radius: 5px;
+    padding: 5px 8px;
+    background-color: rgb(231, 228, 228);
+    border-width: 0px;
+    font-size: x-small;
+    margin-right: 8px;
+}
+
+.btn-pri:hover {
+    color: black;
+    border: 1px solid grey;
+}
+
+.submit-icon {
+    position: relative;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.btn-xss {
+    padding: .5rem .4rem;
+    font-size: .75rem;
+    line-height: .5;
+    border-radius: .2rem;
+    font-weight: bold;
+  }
