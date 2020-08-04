@@ -1,2 +1,5 @@
 # CS50w
-Harvard CS50's Web Programming with Python and JavaScript
+Harvard's CS50w Web Programming with Python and JavaScript
+
+```Project 0, Search```
+Implemented Googol (no copyright infringement intended) which is a Google search frontend replica.
