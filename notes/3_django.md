@@ -28,8 +28,15 @@ How to install app into project? <br>
 11. Template inheritance, 1:03:03
 12. Link to pages, 1:08:50
 13. Namespace collision fix, 1:11:52
-14. Form action, 1:13:09
+14. Form action & POST request, 1:13:09
+15. CSRF token, 1:17:48 
+16. Django forms, 1:19:30
+17. Process POST request, 1:23:49
+18. Redirect page, 1:29:13
+19. Local session values, 1:32:40
+20. Empty list, 1:36:07
 
+<br>
 Django files | Functionalities
 ---|---
 manage.py | Use to execute commands
