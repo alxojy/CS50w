@@ -22,7 +22,13 @@ How to install app into project? <br>
 5. Return HTML template to render frontend, 28:25
 6. Taking parameter for HTML template, 31:33
 7. HTML rendering with parameter, 33:10
-8. 
+8. HTML logical statements, 43:49
+9. Static files, 49:36
+10. Display list, 55:40
+11. Template inheritance, 1:03:03
+12. Link to pages, 1:08:50
+13. Namespace collision fix, 1:11:52
+14. Form action, 1:13:09
 
 Django files | Functionalities
 ---|---
