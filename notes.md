@@ -1,0 +1,33 @@
+### 3. Django
+
+Create a new project <br>
+```django-admin startproject PROJECTNAME``` <br>
+
+Run Django application <br>
+```python3 manage.py runserver``` <br>
+
+Create a new Django app <br>
+```python3 manage.py startapp APPNAME``` <br>
+
+How to install app into project? <br>
+1. Go to ```settings.py```
+2. Scroll to INSTALLED_APPS
+3. Insert string of app filename <br>
+
+#### Timestamps
+1. Create views, 13:40
+2. Create urls, 15:33
+3. Glueing urls together from main project, 17:30
+4. Dynamic urls, 23:48
+5. Return HTML template to render frontend, 28:25
+6. Taking parameter for HTML template, 31:33
+7. HTML rendering with parameter, 33:10
+8. 
+
+Django files | Functionalities
+---|---
+manage.py | Use to execute commands
+settings.py | Configurations and settings for the project
+urls.py | Tables of routes
+views.py | Frontend
+
