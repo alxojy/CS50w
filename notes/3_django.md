@@ -36,7 +36,6 @@ How to install app into project? <br>
 19. Local session values, 1:32:40
 20. Empty list, 1:36:07
 
-<br>
 Django files | Functionalities
 ---|---
 manage.py | Use to execute commands
