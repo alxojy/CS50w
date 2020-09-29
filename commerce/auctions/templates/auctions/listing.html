@@ -1,0 +1,69 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:40px;">
+                <h5>{{ listing.title }}</h5>
+                <img src="{{ listing.image_url }}" style="width:90%;"/>
+            </td>
+            <td style="width: 60%;">
+                <div>{{ listing.description }}</div>
+
+                <form action="{% url 'bidding' listing.id %}" method="post">
+                    {% csrf_token %}
+                    <div>Bid: $ <input type="number" min="{{ listing.price }}" step="0.01" name="bid" placeholder="{{ listing.price }}">
+                    <input type="submit" class="btn btn-primary"> </div>
+                </form>
+
+                <br>
+
+                <div>Category: {{ category }}</div>
+                <div>Listed by: {{ listing.user }}</div>
+
+                <div class="checkbox" >
+                    {% if watching %}
+                        <a href="{% url 'remove_watchlist' listing.id %}"> Remove from WatchList</a>
+                    {% else %}
+                        <a href="{% url 'add_watchlist' listing.id %}"> Add to WatchList</a>
+                    {% endif %}
+                </div>
+
+                {% if is_owner %}
+                    <a href="{% url 'close_bidding' listing.id %}">Close bidding</a>
+                {% else %}
+                    
+                {% endif %}
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<form action="{% url 'listing' listing.id %}" method="post">
+    {% csrf_token %}
+    <h6>Add comment</h6>
+    <textarea class="form-control" aria-label="With textarea" name="comment" style="width:40%; vertical-align: top;"></textarea>
+    <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
+</form>
+
+<br> 
+<h6>Comments</h6>
+<ul style="list-style-type: none;">
+    
+    {% for comment in comments %}
+    <div style="border: 1px solid lightgray; margin: 10px; padding: 10px; border-radius: 10px; width: 40%;">
+        <li>{{ comment }}</li>
+    </div>
+    {% endfor %}
+</ul>
+
+{% else %}
+<h6>Please login or create an account</h6>
+{% endif %}
+
+{% endblock %}

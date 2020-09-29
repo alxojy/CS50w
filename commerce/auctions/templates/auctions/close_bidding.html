@@ -1,0 +1,53 @@
+{% extends "auctions/listing.html" %}
+
+{% block body %}
+
+{% if is_winner %}
+    <h5>Congratulations, you are the winner!</h5>
+{% else %}
+    <h5>Bidding is closed</h5>
+{% endif %}
+
+<table style="width: 100%;">
+    <tbody>
+        <tr>
+            <td style="width:40px;">
+                <h5>{{ listing.title }}</h5>
+                <img src="{{ listing.image_url }}" style="width:90%;"/>
+            </td>
+            <td style="width: 60%;">
+                <div>{{ listing.description }}</div>
+
+                <div>Final bidding price: ${{ listing.price }}</div>
+
+                <br>
+
+                <div>Category: {{ category }}</div>
+                <div>Listed by: {{ listing.user }}</div>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<form action="{% url 'close_bidding' listing.id %}" method="post">
+    {% csrf_token %}
+    <h6>Add comment</h6>
+    <textarea class="form-control" aria-label="With textarea" name="comment" style="width:40%; vertical-align: top;"></textarea>
+    <input type="submit" class="btn btn-primary" style="display: inline-block; margin-top: 10px;">
+</form>
+
+<br> 
+<h6>Comments</h6>
+<ul style="list-style-type: none;">
+    
+    {% for comment in comments %}
+    <div style="border: 1px solid lightgray; margin: 10px; padding: 10px; border-radius: 10px; width: 40%;">
+        <li>{{ comment }}</li>
+    </div>
+    {% endfor %}
+</ul>
+
+{% endblock %}

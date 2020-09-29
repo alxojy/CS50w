@@ -1,0 +1,46 @@
+{% extends "auctions/listing.html" %}
+
+{% block body %}
+<h2>Categories</h2>
+
+<form action="{% url 'categories' %}" method="post">
+    {% csrf_token %}
+    <select name="categories">
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category }}</option>
+        {% endfor %}
+    </select>
+
+    <input type="submit" class="btn btn-primary">
+</form>
+
+<h6>{{ category }}</h6>
+<ul style="list-style-type:none;">
+    {% for listing in listings %} 
+        <div style="border: 1px solid lightgray; margin: 50px; padding: 20px; border-radius: 10px;">
+            <table style="width: 100%;">
+                <tbody>
+                    <tr>
+                        <td style="width:40px;">
+                            <img src="{{ listing.image_url }}" style="width:80%;"/>
+                        </td>
+                        <td style="width: 60%;"  valign="top">
+                            <h5><a href="{% url 'listing' listing.id %}" >{{ listing.title }}</a></h5>
+                            <div>{{ listing.description }}</div>
+                            <div>Bid: ${{ listing.price }}</div>
+                            <div>Listed by: {{ listing.user }}</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    {% empty %}
+        {% if category != "" %}
+            <li>No listings in this category</li>
+        {% endif %}
+
+    {% endfor %}
+</ul>
+
+{% endblock %}
