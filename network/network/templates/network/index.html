@@ -1,0 +1,53 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+{% block script %}
+    <script type="text/javascript" src="{% static 'network/edit.js' %}"></script>
+{% endblock %}
+
+<div id="all-posts" class="p-3">
+    <h3>All Posts</h3>
+
+    <div class="border border-secondary rounded p-3">
+        <h6>New Post</h6>
+        <form id="new-post-form" action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+            <textarea class="form-control mb-2" id="new-post-text" name="post" placeholder="What's on your mind?"></textarea>
+            <input type="submit" class="btn btn-primary" id="new-post-send" value="Post"/>
+        </form>
+    </div>
+
+    <div>
+        {% for post in page_obj %} 
+            <div class="border border-secondary rounded p-3 mt-2">
+                <h4><a href="{% url 'profile' post.user.id %}">{{ post.user }}</a></h4>
+                <div id="post-{{post.id}}">{{ post.post }}</div>
+                {% if post.user.id == user.id %}
+                    <div id="edit" onclick="edit('{{ post.id }}')" class="text-primary">Edit</div>
+                {% else %}
+                {% endif %}
+                <textarea class="form-control mb-2" id="edit-box-{{post.id}}" name="edit-box" style="display:none;"></textarea>
+                <button id="edit-btn-{{post.id}}" class="btn btn-primary" style="display:none;">Save</button>
+
+                <button class="btn mr-1 d-inline-block" style="background-color:white; border-color: red;" id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')"></button>   
+                <div id="like-count-{{post.id}}" class="d-inline-block">{{ post.likes }}</div>
+               
+                <div>{{ post.timestamp }}</div>
+            </div>
+        {% empty %}
+            <li>no post</li>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+</div>
+{% endblock %}

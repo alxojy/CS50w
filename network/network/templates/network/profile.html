@@ -1,0 +1,64 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+{% block script %}
+    <script src="{% static 'network/edit.js' %}"></script>
+{% endblock %}
+
+<div id="profile" class="p-3">
+    <div>
+        <h3 class="ml-5" style="display: inline-block;">{{ owner.username }}</h3>
+        <div class="ml-5" style="display: inline-block;">
+            <div class="border border-secondary rounded p-2" style="display: inline-block;">Followers: {{ followers }}</div>
+            <div class="border border-secondary rounded ml-2 p-2" style="display: inline-block;">Following: {{ following }}</div>
+
+            <form style="display: inline-block;" action="{% url 'profile' owner.id %}" method="post">
+            {% if user.id != owner.id %}
+                {% csrf_token %}
+                {% if button == "Follow" %}
+                    <button type="submit" class="btn btn-primary ml-2" name="button" value="Follow">Follow</button>
+                {% else %}
+                    <button type="submit" class="btn btn-danger ml-2" name="button" value="Unfollow">Unfollow</button>
+                {% endif %}
+            {% else %}
+            {% endif %}
+            </form>
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div>
+        {% for post in page_obj %} 
+            <div class="border border-secondary rounded p-3 mt-2">
+                <div id="post-{{post.id}}">{{ post.post }}</div>
+                {% if user.id == owner.id %}
+                <div id="edit" onclick="edit('{{ post.id }}')" class="text-primary">Edit</div>
+                {% else %}
+                {% endif %}
+                <textarea class="form-control mb-2" id="edit-box-{{post.id}}" name="edit-box" style="display:none;"></textarea>
+                <button id="edit-btn-{{post.id}}" class="btn btn-primary" style="display:none;">Save</button>
+                <button class="btn mr-1 d-inline-block" style="background-color:white; border-color: red;" id="like-btn-{{post.id}}" onclick="like('{{ post.id }}')"></button>   
+                <div id="like-count-{{post.id}}" class="d-inline-block">{{ post.likes }}</div>
+                <div>{{ post.timestamp }}</div>
+            </div>
+        {% empty %}
+            <div>It's empty here :( Add new posts to brighten up your page</div>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+    {% endif %}
+
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+    {% endif %}
+
+</div>
+
+{% endblock %}
+
